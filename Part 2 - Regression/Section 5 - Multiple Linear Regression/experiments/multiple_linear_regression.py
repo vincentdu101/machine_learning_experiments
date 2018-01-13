@@ -1,4 +1,4 @@
-# Multiple Linear Regression
+# Multiple Linear Regression - Backward Elimination
 
 # Importing the libraries
 import numpy as np
@@ -27,7 +27,7 @@ onehotencoder = OneHotEncoder(categorical_features = [3])
 X = onehotencoder.fit_transform(X).toarray()
 
 # Avoiding the Dummy Variable Trap
-# X = X[:, 1:]
+X = X[:, 1:]
 
 # splitting the dataset into the training set and test set 
 # training set is the set the model will use to learn and develop itself on
@@ -131,10 +131,69 @@ from sklearn.linear_model import LinearRegression
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
+# predicting the test set results
+y_pred = regressor.predict(X_test)
 
+# building the optimal model using Backward Elimination
+# removing columns that dont affect the overall value of the dependent variable
+import statsmodels.formula.api as sm
 
+# backward elimination steps
+# bo constant not taken into account in this library, some other libraries do 
+# use it, but not this one so we need to add it here otherwise it will throw 
+# off the equation since it will treat the first column as b0
+# so we add an artificial column of ones to the dataset
+X = np.append(arr = np.ones((50, 1)).astype(int), values = X, axis = 1)
 
+# step 1- X with all independent variables
+X_opt = X[:, [0, 1, 2, 3, 4, 5]]
 
+# step 2 - ordinary least squares model to fit all independent variables
+# into the model
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+
+# step 3 - 
+# lower P-value the more significant the level to the y dependent variable
+# look for highest P-Value and remove it if it is higher than SL of 0.05
+regressor_OLS.summary() 
+
+# remove index 2 column since it is has the highest P value of 0.99 and is higher 
+# than SL of 0.05
+
+# what is the P value 
+# - http://blog.minitab.com/blog/adventures-in-statistics-2/how-to-interpret-regression-analysis-results-p-values-and-coefficients
+# - P-value for each term tests the null hypothesis that the coefficient is equal
+# to zero which means no effect on the value of the dependent variable
+# - so a low P-value (< 0.05) means you can reject the null hypothesis
+# - predictor that has a low P-value is likely to be a meaningful addition to your 
+# model because changes in the predictor's value are releated to changes in the 
+# dependent or response variable
+# - a larger (insignificant level) P-value suggests that changes in the predictor
+# are not related with changes in the dependent variable
+# - å is the significance level (SL), it is the probability of making a Type I error, 
+# usually small like 0.01, 0.05, or 0.1
+X_opt = X[:, [0, 1, 3, 4, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary() 
+
+# remove column index 1 since its highest P-value (P>|t|) is higher than SL of 0.05
+X_opt = X[:, [0, 3, 4, 5]]
+regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit()
+regressor_OLS.summary() 
+
+# remove column index 4 since its highest P-value (P>|t|) is higher than SL of 0.05
+X_opt = X[:, [0, 3, 5]]
+regressor_OLS = sm.OLS(endog=y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+# remove column index 5 since its highest P-value (P>|t|) is higher than SL of 0.05
+X_opt = X[:, [0, 3]]
+regressor_OLS = sm.OLS(endog=y, exog = X_opt).fit()
+regressor_OLS.summary()
+
+# stop here since the model now has only columns that have a P-value that is lower 
+# than SL of 0.05
+# only R and D Spending is a significant independent variable 
 
 
 
