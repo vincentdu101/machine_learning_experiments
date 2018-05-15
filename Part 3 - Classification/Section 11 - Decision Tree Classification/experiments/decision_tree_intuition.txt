@@ -1,0 +1,21 @@
+Decision Tree Intuition 
+
+CART
+- Classification Trees
+-- classifies data
+
+- Regression Trees
+-- predict outcomes
+
+How does it work 
+- splits data into different sections 
+- splits selected by minimizing entropy 
+- algorithm looks for optimal split into splits (leaves)
+- each split checks for a condition to see which leave a point belongs to 
+
+Decision Tree Facts
+- old method, not as popular 
+- reborn with new upgrades
+- upgrades are additional methods build on decision tree
+-- Random Forest
+-- Gradient Boosting

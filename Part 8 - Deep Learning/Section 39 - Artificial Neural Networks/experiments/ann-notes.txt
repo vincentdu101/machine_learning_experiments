@@ -1,0 +1,103 @@
+The Neuron 
+- main parts are the input signal, main body of the neuron, and output signal 
+- input signal comes from other neurons 
+- input values are the independent values 
+- output signal is the dependent value 
+- main body neuron is the function or the hidden layer
+- All of the values are added up, weighted sum of all input values multiply by 
+the weight being added up
+- Applies activation function that is assigned to the neuron and it is applied 
+to the weighted sum and the output from that function is what the neuron checks 
+to see whether to pass along to the next neuron via the output layer
+
+Input Layer 
+- Independent variables 
+- all for one single observations, take a list of independent variables that describe
+a row of data
+- need to standardize or normalize them, get values between 0 and 1
+
+Output layer
+- Can be continuous (price)
+- Binary (will exit yes/no)
+- Categorical -> multiple output values (dummy variables)
+
+Input and Output layer is for the same observation
+
+Synapses - Weights (Signals)
+- Weights are crucial to ANN
+- By adjusting weights, neural network learns what signals should be or not be passed
+along 
+- Adjusted through the process of learning
+- Where gradient descent and backpropagation comes in
+
+Activation Function 
+- Threshold Function 
+-- x-axis weighted sum, y-axis values 0 to 1
+-- if activation function output is >= return 1, otherwise pass 0
+
+- Sigmoid Function 
+-- activation function is determined by formula 1 / (1 + e^-x)
+-- A logistic regression, it is smooth unlike threshold function 
+-- not either or like threshold
+-- approximates the value, useful for predicting probability 
+
+- Rectifer Function
+-- starts from 0 then gradually increases to 1
+-- max(x, 0)
+-- one of the most popular used
+
+- Hyperbolic Tangent (tanh)
+-- similar to sigmoid 
+-- however, values can go down into -1 
+-- formula (1 - e^-2x / (1 + e^-2x)
+
+How do NNs Work?
+- Given some input parameters (area, bedroom, distance to city, age) in input layer
+- one output (synapse) of dependent variable (price)
+- price is calculated using function in the hidden layer
+- hidden layer gives extra power in calculations, each hidden layer node filters 
+out independent variable that have weights that don't meet the threshold
+- hidden layer activation function will only trigger if the weights meet its threshold
+- neuron learns what the ideal combination of independent variables are 
+- together they predict the price or dependent variable
+
+How do NNs learn? - https://stats.stackexchange.com/questions/154879/a-list-of-cost-functions-used-in-neural-networks-alongside-applications
+- several ways tell how program runs
+- hardcode the rules 
+- use neural networks to allow the program to analyze the input and figure everything out
+- goal is to use neural networks so that it can learn on its own
+- go to dataset and learn on its own what certain output values are and then use 
+that to compare new input
+- perceptron is a single node hidden layer neural network 
+- y hat ^ is a predicted output value
+- input variables go into the hidden layer node and it calculates the predicted y output value
+- cost function used to compare difference between predicted output value and the actual
+output value
+- cost function tells you what the error rate is, goal is to minimize it, the lower 
+it is the closer the predicted output value is to the actual output value
+- feed output of cost function back to the neural network and the weights are updated
+- weights are the only values that are changing during the system run
+- each cycle has been using only one row of dataset during basic example
+- if multiple rows then multiple hidden node layers are used to the same process 
+each time sharing the weights and the changes to the weights with one shared cost function 
+that sums up all of the weights being calculated 
+- this whole process is called backpropagation
+
+Gradient Descent 
+- how weights are adjusted
+- brute force approach, take list of weights and look at them to see what works best
+- increasing of weights and inputs lead to the curse of dimensionality 
+- better way is to use gradient descent
+- faster way to find the best option
+- start from point and look at angle of cost function and differentiate the slope of the
+cost function 
+- if slope negative then we go down hill and right, if slope positive then we go left since it's uphill
+- we try to find the point where the slope is 0 where it is flat
+- see which way cost function is sloping based on the new combination of weights
+- gradual descending into the minimum of the cost function
+
+
+
+
+
+

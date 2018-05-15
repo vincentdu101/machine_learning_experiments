@@ -27,6 +27,7 @@ onehotencoder = OneHotEncoder(categorical_features = [3])
 X = onehotencoder.fit_transform(X).toarray()
 
 # Avoiding the Dummy Variable Trap
+# drop one of the columns to prevent multi colinearity
 X = X[:, 1:]
 
 # splitting the dataset into the training set and test set 
