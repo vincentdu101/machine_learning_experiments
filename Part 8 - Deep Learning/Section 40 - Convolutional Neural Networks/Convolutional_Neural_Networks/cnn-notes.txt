@@ -1,0 +1,21 @@
+Convolutional Networks (CNN)
+- Yann Lecun pioneering Facebook AI 
+
+How it works
+- Input image goes in, CNN classifies it, and output labels describing what it is
+- Face of smiling person, CNN classifies it, and outputs it is happy
+- recognizing features of image to determine what it is 
+
+How does it recognize features
+- given on black and white and a colored image
+- converts the b/w image into a 2d array with every pixel on a range from 0 to 255 
+- this represents the intensity of the color, ranging from black to white and grayscale
+in between 
+- in colored image it is a 3d array of pixels with red, green, and blue layer (RGB)
+- each layer has its own intensity of the color, (0 to 255), by combining the 
+three colors we form a color for each pixel
+- for b/w we can also have a boolean that shows 1 or 0 to showcase when to turn on black 
+vs white
+
+Step 1 Convolution
+-  
