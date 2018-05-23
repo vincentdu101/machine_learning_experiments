@@ -1,5 +1,9 @@
 Convolutional Networks (CNN)
 - Yann Lecun pioneering Facebook AI 
+- http://scs.ryerson.ca/~aharley/vis/conv/flat.html
+- http://scs.ryerson.ca/~aharley/vis/conv/
+- https://adeshpande3.github.io/adeshpande3.github.io/The-9-Deep-Learning-Papers-You-Need-To-Know-About.html
+
 
 How it works
 - Input image goes in, CNN classifies it, and output labels describing what it is
@@ -18,4 +22,60 @@ three colors we form a color for each pixel
 vs white
 
 Step 1 Convolution
--  
+- Look at the convolution formula and article
+- 3x3 feature detector, different grid sizes are possible
+- feature detector also called filter and other names
+- take feature detector and put on part of the image, and multiply 
+by the feature detector
+- matrix of section of image x matrix of feature detector
+- the feature map is a matrix of where we measure what combinations matched up to 
+make a 1 otherwise 0 to combine to the feature
+- becomes a convolve feature or activation map
+- we reduce the size of the input image so that its easier to 
+process it 
+- we are losing parts of the image, but we try to keep the integral 
+parts of the image
+- we essentially map the key features of a map
+- we then create multiple feature maps to get our first convolution layer
+- we have several features map to look for specific features, 
+one feature map for each feature
+- once we have filter we'll apply it to the image to create 
+an effect
+
+Step 1(B) - ReLU layer
+- we apply rectifier to increase non-linearility 
+- increase it because the images are highly non-linear 
+- image sections are not linear next to each other 
+
+Step 2 - Max Pooling also called downsampling
+- train neural network to recognize picture in any different form
+- has spacial invariance, doesn't care if the features are different relative to each other
+- must still be able to find that feature 
+- taking a feature map, this is after convolution layer, apply a max pooling 
+- take a grid of box and place a one on the section and record the maximum 
+- then move across the images recording the maximum
+- determine where you find the closest proximity of the feature
+- account for any distortion
+- reduce size of image and parameters that will go into final neural network 
+- prevent overfitting so that we don't include irrelevant info (reduce noise)
+- sub sampling is average pooling, take the average values out of all of the convolution layer
+- this is done for each of the feature maps in the convolution layer
+
+Step 3 - Flattening
+- After getting the pooled feature map, we take and flatten it into a column
+- This way we can put it into a neural network for processing 
+- Each feature map of the pooling layer becomes a column many row input neural network vector
+
+Step 4 - Full Connection
+- adding an artificial neural network to the convolution neural network 
+- We will have an input layer, then fully connected layer (type of hidden layer), and output layer
+- each flattened feature map will be an input vector in the input layer
+- each output vector from the output layer will be leveraged in the fully connected layer
+to refine and recalculate the output layer
+- we will loss function which tells us how well the network is performing with each Input
+- error is backpropagated, and the network adjusts the weights along with the feature detectors
+- errors are compared and modified via gradient descent and backpropagation
+- determine which weights of features map to a dog and then determine the nodes that reflect 
+these features the most and ignore the ones that don't lead to the classification
+- the output is how much probability is for each category of classification
+- neurons of final fully connected neurons are able to vote on what they think is the classification
